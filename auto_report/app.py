@@ -1,3 +1,19 @@
+# ------------------------------------------------------------
+# app.py
+# Streamlit UI for AutoReport AI
+# 
+# This module handles:
+#   1. File uploads (CSV / JSON / SQL / SQLite)
+#   2. Data preview and sanity checks
+#   3. Triggering AI insights and report generation
+#   4. Downloading PPTX/PDF outputs
+# 
+# The goal of this layer is to stay thin and focus only on:
+#   1. User input handling
+#   2. Displaying results
+#   3. Passing data to processing modules
+# ------------------------------------------------------------
+
 import os
 import streamlit as st
 from ingest import ingest_csv, ingest_sql, ingest_sqlite, ingest_json
@@ -51,19 +67,14 @@ if df is not None:
     st.subheader("Data Preview")
     st.dataframe(df)
 
-    # Generate summary (used internally only)
+    # Generate summary
     summary = generate_summary(df)
 
-    # Generate plots (used for reports only)
+    # Generate plots
     plots = generate_plots(df)
 
-    # Do NOT show summary or plots in UI
-    # st.subheader("Summary")
-    # st.json(summary)
 
-    # for col, img in plots:
-    #     st.image(img)
-
+    # Generate AI Insights
     st.subheader("AI Insights (Groq)")
     insights = generate_insights(summary)
     st.write(insights)
@@ -79,12 +90,12 @@ if df is not None:
     output_folder = os.path.join(os.path.dirname(__file__), "..", "output", dataset_name)
     os.makedirs(output_folder, exist_ok=True)
 
-    # PPTX
+    # Download PPTX
     pptx_path = create_ppt(summary, insights, plots, df, output_folder, filename=f"{dataset_name}_report.pptx")
     with open(pptx_path, "rb") as f:
         st.download_button("Download PPTX Report", f, f"{dataset_name}_report.pptx")
 
-    # PDF
+    # Download PDF
     pdf_path = create_pdf(summary, insights, plots, df, output_folder, filename=f"{dataset_name}_report.pdf")
     with open(pdf_path, "rb") as f:
         st.download_button("Download PDF Report", f, f"{dataset_name}_report.pdf")

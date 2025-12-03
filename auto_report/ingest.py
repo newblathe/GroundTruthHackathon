@@ -1,3 +1,14 @@
+# ------------------------------------------------------------
+# ingest.py
+# Responsible for loading data from multiple sources:
+#   1. CSV files
+#   2. JSON files
+#   3. SQL queries
+#   4. SQLite databases
+#
+# The ingestion layer abstracts away input differences so the downstream pipeline always receives a clean pandas DataFrame.
+# ------------------------------------------------------------
+
 import pandas as pd
 import sqlite3
 from sqlalchemy import create_engine

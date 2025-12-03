@@ -66,41 +66,41 @@ AutoReport AI is built like a mini-analytics pipeline:
 
 ### 1. Ingestion Engine
 
-    Supports:
+Supports:
 
-    * CSV
+* CSV
 
-    * JSON
+* JSON
 
-    * SQL databases
+* SQL databases
 
-    * SQLite
+* SQLite
 
 Designed to mimic enterprise ETL ingestion patterns.
 
 ### 2. Data Processing (Pandas)
 
-    Automatic generation of:
+Automatic generation of:
 
-    * Descriptive statistics
+* Descriptive statistics
 
-    * Missing value summary
+* Missing value summary
 
-    * Numeric distribution plots
+* Numeric distribution plots
 
-    * Correlation matrix
+* Correlation matrix
 
 ### 3. Insight Generation (Groq Llama 3.1 – 8B Instant)
 
-    The AI model performs:
+The AI model performs:
 
-    * Structured narrative writing
+* Structured narrative writing
 
-    * Numbered insights
+* Numbered insights
 
-    * Executive tone of voice
+* Executive tone of voice
 
-    * Zero hallucination formatting
+* Zero hallucination formatting
 
 Strict cleaning rules ensure AI content looks like a real analyst wrote it.
 
@@ -116,8 +116,6 @@ Strict cleaning rules ensure AI content looks like a real analyst wrote it.
     * XML bullet-removal
 
     * Plots embedded
-
-    Insights preserved exactly as AI writes them
 
 * #### PDF Generator (ReportLab)
 
@@ -138,6 +136,15 @@ Each dataset gets its own folder:
     <dataset_name>_report.pptx`
 
 
+
+## Tech Stack
+* Language: Python 3.10
+* Data Engine: Pandas
+* AI Model: Groq Llama 3.1 (8B Instant)
+* PPT Render: python-pptx
+* PDF Render: ReportLab
+* Visualization: Matplotlib, Seaborn
+* UI: Streamlit
 
 ## How to Run Locally
 ### 1. Clone Repository

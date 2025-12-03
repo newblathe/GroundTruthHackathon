@@ -1,7 +1,21 @@
+# ------------------------------------------------------------
+# processor.py
+# Contains all dataset analysis and visualization logic.
+#
+# Responsibilities:
+#   1. Compute basic dataset statistics
+#   2. Summarize missing values
+#   3. Generate histograms for numeric columns
+#   4. Compute correlation matrices
+#
+# This module transforms raw data into structured analytics that can be consumed by both the AI insight engine and the report generation pipeline.
+# ------------------------------------------------------------
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import io
 
+# Dataset Summary Generator
 def generate_summary(df):
     return {
         "rows": df.shape[0],
@@ -10,6 +24,7 @@ def generate_summary(df):
         "describe": df.describe(include='all').to_dict()
     }
 
+# Plots Generator
 def generate_plots(df):
     plot_images = []
     numeric_cols = df.select_dtypes(include="number").columns

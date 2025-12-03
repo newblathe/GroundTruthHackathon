@@ -15,14 +15,12 @@ from reportlab.lib.enums import TA_LEFT
 
 
 def disable_bullets(paragraph):
-    """Remove bullet formatting in PPTX paragraphs."""
     pPr = paragraph._p.get_or_add_pPr()
     buNone = OxmlElement("a:buNone")
     pPr.append(buNone)
 
 
 def clean_text(line: str):
-    """Remove unwanted bullet characters but preserve numbering/headings."""
     return (
         line.replace("•", "")
             .replace("*", "")
@@ -70,16 +68,17 @@ def generate_corr_heatmap(df):
 
 
 
+# PPTX REPORT GENERATOR
 def create_ppt(summary, insights, plot_images, df, folder_path, filename="report.pptx"):
     prs = Presentation()
     ppt_path = os.path.join(folder_path, filename)
 
-    # ---------------- Title Slide ----------------
+    # Title Slide
     slide = prs.slides.add_slide(prs.slide_layouts[0])
     slide.shapes.title.text = "AI Analytics Report"
     slide.placeholders[1].text = ""
 
-    # ---------------- Summary Slide ----------------
+    # Summary Slide
     slide = prs.slides.add_slide(prs.slide_layouts[1])
     slide.shapes.title.text = "Dataset Summary"
 
@@ -97,7 +96,7 @@ def create_ppt(summary, insights, plot_images, df, folder_path, filename="report
         p.font.size = Pt(15)
         disable_bullets(p)
 
-    # ---------------- Insights Slide ----------------
+    # Insights Slide
     slide = prs.slides.add_slide(prs.slide_layouts[1])
     slide.shapes.title.text = "AI Insights"
 
@@ -164,14 +163,14 @@ def create_pdf(summary, insights, plot_images, df, folder_path, filename="report
         story.append(Paragraph(line, body_style))
     story.append(Spacer(1, 12))
 
-    # ---------------- Heatmap ----------------
+    # Heatmap
     heatmap = generate_corr_heatmap(df)
     if heatmap:
         story.append(Paragraph("Correlation Heatmap", styles["Heading3"]))
         story.append(Image(heatmap, width=350, height=250))
         story.append(Spacer(1, 12))
 
-    # ---------------- Histograms ----------------
+    # Histograms
     for col, img in plot_images:
         story.append(Paragraph(f"Distribution: {col}", styles["Heading3"]))
         story.append(Image(img, width=350, height=250))
