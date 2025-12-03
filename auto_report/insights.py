@@ -1,6 +1,6 @@
 from groq import Groq
 
-client = Groq(api_key="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")
+client = Groq(api_key="Placeholder text")
 
 def generate_insights(summary):
     prompt = f"""
