@@ -46,15 +46,31 @@ Everything is clean, formatted, and presentation-ready.
 * Action: Wait ~20 seconds.
 * Output: Downloads containing:
 
-    1. Dataset summary
+    1. PDF Report (Text-Only Report)
 
-    2. AI-generated insights (with numbering preserved)
+        * The PDF file contains:
 
-    3. Correlation heatmap
+        * Dataset Summary
 
-    4. Distribution charts
+        * Rows, columns, missing values
 
-    5. Proper layout (no bullets, no overflow)
+        * Clean descriptive information
+
+        * AI-Generated Insights
+
+        * Recommendations & observed patterns
+    
+    2. PPTX Report (Visual Analytics Only)
+
+        * The PPTX file contains:
+
+        * Correlation Heatmap
+
+        * Distribution Histograms (one slide per column)
+
+        * Clean visual-only layout
+
+        * Full-size, properly scaled plots
 
 
 * Saved inside:
@@ -164,6 +180,33 @@ Each dataset gets its own folder:
 
 
 Upload any dataset → Generate reports → Download clean PPTX/PDF.
+
+## Visual Proof (Screenshots)
+
+### 1. Streamlit Application
+![Streamlit UI 1](Screenshots/streamlit_ui_1.png)
+
+![Streamlit UI 2](Screenshots/streamlit_ui_2.png)
+
+![Streamlit UI 3.](Screenshots/streamlit_ui_3.png)
+
+![Streamlit UI 4.](Screenshots/streamlit_ui_4.png)
+
+![Streamlit UI 5.](Screenshots/streamlit_ui_5.png)
+
+### 2. Generated PDF Summary
+![PDF Summary 1](Screenshots/pdf_1.png)
+
+![PDF Summary 1](Screenshots/pdf_2.png)
+
+
+
+
+### 3. Generated PPTX Graph Report
+![PPT Graph](Screenshots/ppt_1.png)
+
+![PPT Graph](Screenshots/ppt_2.png)
+
 
 
 

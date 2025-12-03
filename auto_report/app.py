@@ -13,11 +13,15 @@
 #   2. Displaying results
 #   3. Passing data to processing modules
 # ------------------------------------------------------------
+# ------------------------------------------------------------
+# app.py
+# Streamlit UI for AutoReport AI
+# ------------------------------------------------------------
 
 import os
 import streamlit as st
 from ingest import ingest_csv, ingest_sql, ingest_sqlite, ingest_json
-from processor import generate_summary, generate_plots
+from processor import generate_summary, generate_plots, generate_corr_heatmap
 from insights import generate_insights
 from report import create_ppt, create_pdf
 
@@ -72,7 +76,7 @@ if df is not None:
 
     # Generate plots
     plots = generate_plots(df)
-
+    heatmap = generate_corr_heatmap(df)
 
     # Generate AI Insights
     st.subheader("AI Insights (Groq)")
@@ -90,13 +94,12 @@ if df is not None:
     output_folder = os.path.join(os.path.dirname(__file__), "..", "output", dataset_name)
     os.makedirs(output_folder, exist_ok=True)
 
-    # Download PPTX
-    pptx_path = create_ppt(summary, insights, plots, df, output_folder, filename=f"{dataset_name}_report.pptx")
-    with open(pptx_path, "rb") as f:
-        st.download_button("Download PPTX Report", f, f"{dataset_name}_report.pptx")
-
     # Download PDF
-    pdf_path = create_pdf(summary, insights, plots, df, output_folder, filename=f"{dataset_name}_report.pdf")
+    pdf_path = create_pdf(summary, insights, output_folder, filename=f"{dataset_name}_summary.pdf")
     with open(pdf_path, "rb") as f:
-        st.download_button("Download PDF Report", f, f"{dataset_name}_report.pdf")
+        st.download_button("Download Summary PDF", f, f"{dataset_name}_summary.pdf")
 
+    # Download PPT
+    pptx_path = create_ppt(plots, heatmap, output_folder, filename=f"{dataset_name}_graphs.pptx")
+    with open(pptx_path, "rb") as f:
+        st.download_button("Download Graph PPTX", f, f"{dataset_name}_graphs.pptx")

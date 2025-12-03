@@ -13,7 +13,7 @@
 
 from groq import Groq
 
-client = Groq(api_key="Placeholder text")
+client = Groq(api_key="Placholder API")
 
 # AI Insights Generator
 def generate_insights(summary):

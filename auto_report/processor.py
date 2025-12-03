@@ -13,6 +13,7 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 import io
 
 # Dataset Summary Generator
@@ -42,3 +43,18 @@ def generate_plots(df):
         plt.close()
 
     return plot_images
+
+# Heatmap Generator
+
+def generate_corr_heatmap(df):
+    num_df = df.select_dtypes(include="number")
+    if num_df.empty:
+        return None
+
+    plt.figure(figsize=(5, 3))
+    sns.heatmap(num_df.corr(), annot=True, cmap="Blues")
+    buf = io.BytesIO()
+    plt.savefig(buf, format="png", bbox_inches="tight")
+    buf.seek(0)
+    plt.close()
+    return buf
