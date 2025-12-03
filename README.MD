@@ -166,11 +166,11 @@ Each dataset gets its own folder:
 ### 1. Clone Repository
 * `git clone https://github.com/newblathe/GroundTruthHackathon.git`
 * `cd GroundTruthHackathon/auto_report`
-* #### NOTE: Replace the placeholder Groq API key inside `insights.py` with your actual Groq API key before running the application.
+* **NOTE**: Replace the placeholder Groq API key inside `insights.py` with your actual Groq API key before running the application.
 
 ### 2. Create Conda Environment
-`conda create -n auto_report python=3.10`
-`conda activate auto_report`
+* `conda create -n auto_report python=3.10`
+* `conda activate auto_report`
 
 ### 3. Install Dependencies
 `pip install -r requirements.txt`
